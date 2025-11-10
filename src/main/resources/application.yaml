@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: PF-DevDays-2025-OTS-Demo
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    # Schema Registry
+    properties:
+      schema.registry.url: http://localhost:8081
+      specific.avro.reader: true
+      compression.type: lz4 # REALLY IMPORTANT!
+      retry.backoff.ms: 500
+      delivery.timeout.ms: 120000
+
+    # Producer configuration
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaJsonSchemaSerializer
+      properties:
+        compression.type: lz4 # REALLY IMPORTANT!
+        enable.idempotence: true
+        max.in.flight.requests.per.connection: 5
+        schema.registry.url: http://localhost:8081
+
+    # Consumer configuration
+    consumer:
+      group-id: outbox-demo-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaJsonSchemaDeserializer
+      max-poll-records: 500
+      fetch-min-bytes: 1
+      fetch-max-wait: 100
+      properties:
+        isolation.level: read_committed
+        compression.type: lz4 # REALLY IMPORTANT!
+        schema.registry.url: http://localhost:8081
+        json.value.type: com.example.outbox.event.OutboxEvent
+
+logging:
+  level:
+    org.apache.kafka: INFO
+    org.springframework.kafka: INFO

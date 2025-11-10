@@ -1,10 +1,10 @@
+package com.dautomation.PF.DevDays.ots.demo.eventProcessing.config;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.config.KafkaListenerEndpoint;
 import org.springframework.kafka.retrytopic.DestinationTopic.Properties;
 import org.springframework.kafka.retrytopic.RetryTopicNamesProviderFactory;
 import org.springframework.kafka.retrytopic.SuffixingRetryTopicNamesProviderFactory.SuffixingRetryTopicNamesProvider;
-
-import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class DltAndRetryNameProvider implements RetryTopicNamesProviderFactory {
