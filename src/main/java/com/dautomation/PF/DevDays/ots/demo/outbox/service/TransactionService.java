@@ -19,12 +19,13 @@ public class TransactionService {
 
   @Transactional(readOnly = true)
   public void processBooks() {
-    Stream<Transaction> bookStream = transactionRepository.getAll();
+    Stream<Transaction> transactionStream =
+        transactionRepository.getAll();
 
-    bookStream.forEach(book -> {
+    transactionStream.forEach(transaction -> {
       log.info("add handling here");
       //TODO some processing
-      entityManager.detach(book);
+      entityManager.detach(transaction);
     });
   }
 }

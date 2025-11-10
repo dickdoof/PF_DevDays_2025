@@ -11,7 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.Repository;
 
-public interface TransactionRepository extends Repository<Transaction, Long> {
+
+public interface TransactionRepository extends Repository<Transaction, String> {
 
   @QueryHints(value = {
       @QueryHint(name = HINT_FETCH_SIZE, value = "" + Integer.MIN_VALUE),
