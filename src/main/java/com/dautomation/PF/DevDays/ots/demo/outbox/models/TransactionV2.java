@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionV2 extends Transaction {
+public class TransactionV2 extends TransactionV1 {
 
   private List<String> hashTags; // new field in v2
   private Instant createdAt; // another new field
